@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zebin He — Ph.D. student in Computer Science at HKUST, working on 3D generation, PBR material synthesis and 2D-3D correspondence.">
+<title>Zebin He — Academic Homepage</title>
+<style>
+  :root{
+    --paper:#f7f4ec;
+    --paper-light:#fcfaf4;
+    --ink:#23272b;
+    --ink-soft:#555c5c;
+    --ink-faint:#8b8f88;
+    --line:rgba(35,39,43,.13);
+    --cinnabar:#a63c2d;
+    --cinnabar-wash:rgba(166,60,45,.07);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Songti SC","Noto Serif CJK SC",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:radial-gradient(1100px 620px at 50% -12%,#fdfbf6 0%,rgba(253,251,246,0) 72%),var(--paper);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:920px;margin:0 auto;padding:0 30px}
+
+  /* top bar */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    background:rgba(247,244,236,.9);
+    backdrop-filter:saturate(140%) blur(10px);
+    -webkit-backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{
+    height:54px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .brand .mini{
+    width:25px;height:25px;flex:none;display:flex;align-items:center;justify-content:center;
+    background:var(--cinnabar);color:#fbf8f0;font-family:var(--serif);font-size:11px;
+    letter-spacing:.02em;border-radius:2px;transform:rotate(-3deg);
+  }
+  .brand span{font-family:var(--serif);font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .topnav{display:flex;gap:22px;align-items:center}
+  .topnav a{
+    font-size:12px;letter-spacing:.06em;color:var(--ink-soft);text-decoration:none;
+    padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s;
+  }
+  .topnav a:hover{color:var(--cinnabar);border-color:var(--cinnabar)}
+
+  /* hero */
+  .hero{padding:78px 0 54px;border-bottom:1px solid var(--line);position:relative}
+  .hero-inner{display:block}
+  h1{
+    font-family:var(--serif);font-weight:500;font-size:clamp(42px,7vw,66px);
+    line-height:1.05;letter-spacing:.01em;margin:0 0 14px;
+  }
+  h1::after{
+    content:"";display:block;width:52px;height:2px;background:var(--cinnabar);margin-top:22px;
+    opacity:.85;
+  }
+  .role{font-family:var(--serif);font-size:18px;color:var(--ink-soft);margin:0 0 20px}
+  .contact{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;font-size:13.5px}
+  .contact a{
+    text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);
+    padding-bottom:2px;transition:.2s;
+  }
+  .contact a:hover{color:var(--cinnabar);border-color:var(--cinnabar)}
+  .contact .dot{color:var(--ink-faint);font-size:11px}
+
+  /* sections */
+  section{padding:54px 0;border-bottom:1px solid var(--line);scroll-margin-top:60px}
+  .shead{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .shead .num{font-family:var(--serif);font-size:12.5px;color:var(--cinnabar);letter-spacing:.06em}
+  .shead h2{font-family:var(--serif);font-size:25px;font-weight:500;letter-spacing:.02em;margin:0}
+
+  .about-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:48px}
+  .about-grid p{margin:0 0 14px;color:var(--ink-soft);font-size:14.7px;line-height:1.9;text-align:justify;text-justify:inter-word}
+  .about-grid p:last-child{margin-bottom:0}
+  .plink{
+    color:var(--cinnabar);text-decoration:none;font-weight:inherit;white-space:nowrap;
+    border-bottom:1px solid rgba(166,60,45,.38);padding-bottom:1px;transition:.2s;
+  }
+  .plink:hover{border-color:var(--cinnabar)}
+  .interests{list-style:none;padding:0;margin:0}
+  .interests li{
+    display:flex;gap:12px;align-items:baseline;padding:9px 0;
+    border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);
+  }
+  .interests li:first-child{padding-top:0}
+  .interests li::before{content:"";width:5px;height:5px;flex:none;background:var(--cinnabar);transform:rotate(45deg);opacity:.8}
+  .sublabel{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 12px}
+
+  /* timeline */
+  .timeline{display:grid;grid-template-columns:150px 1fr;gap:0}
+  .tl-date{
+    font-size:12.5px;color:var(--ink-faint);padding:16px 22px 16px 0;text-align:right;
+    white-space:nowrap;letter-spacing:.02em;
+  }
+  .tl-body{border-left:1px solid var(--line);padding:16px 0 16px 26px;position:relative}
+  .tl-body::before{
+    content:"";position:absolute;left:-4px;top:24px;width:7px;height:7px;
+    background:var(--paper);border:1px solid var(--cinnabar);border-radius:50%;
+  }
+  .tl-title{font-family:var(--serif);font-size:16.5px;margin:0 0 3px}
+  .tl-sub{font-size:13.5px;color:var(--ink-soft);margin:0}
+  .tl-note{font-size:12.5px;color:var(--ink-faint);margin:4px 0 0}
+
+  /* publications */
+  .pub{
+    display:grid;grid-template-columns:220px 1fr;gap:26px;
+    padding:24px 0;border-top:1px solid var(--line);
+  }
+  .pub:first-of-type{border-top:none;padding-top:4px}
+  .thumb{
+    width:220px;aspect-ratio:16/10;overflow:hidden;position:relative;
+    background:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+  .thumb:hover img{transform:scale(1.045)}
+  .thumb.ph{
+    background:linear-gradient(140deg,#efece3 0%,#f9f7f1 55%,#eeeae0 100%);
+    flex-direction:column;gap:10px;
+  }
+  .ph-word{font-family:var(--serif);font-size:19px;letter-spacing:.16em;color:#9a9d94}
+  .ph-line{width:34px;height:2px;background:var(--cinnabar);opacity:.65}
+  .pub h3{font-family:var(--serif);font-size:17.5px;font-weight:500;line-height:1.45;margin:0 0 9px}
+  #reports .pub h3{font-weight:600}
+  .pub-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:9px}
+  .venue{
+    font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    border:1px solid rgba(35,39,43,.28);color:var(--ink-soft);padding:2px 8px;
+  }
+  .venue.hl{color:var(--cinnabar);border-color:var(--cinnabar);background:var(--cinnabar-wash)}
+  .authors{font-size:13.2px;color:var(--ink-soft);line-height:1.65;margin:0}
+  .me{color:var(--ink);font-weight:600}
+  .links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:11px}
+  .links a{
+    font-size:12.5px;color:var(--cinnabar);text-decoration:none;
+    border-bottom:1px solid rgba(166,60,45,.32);padding-bottom:1px;transition:.2s;
+  }
+  .links a:hover{border-color:var(--cinnabar)}
+  /* projects + awards */
+  .simple{list-style:none;margin:0;padding:0}
+  .simple li{
+    display:flex;justify-content:space-between;gap:24px;align-items:baseline;
+    padding:13px 0;border-top:1px solid var(--line);font-size:14.2px;
+  }
+  .simple li:first-child{border-top:none}
+  .simple .s-sub{display:block;font-size:12.5px;color:var(--ink-faint);margin-top:2px}
+  .simple .s-year{flex:none;font-size:12.5px;color:var(--ink-faint);white-space:nowrap}
+  .simple a{color:var(--cinnabar);text-decoration:none;border-bottom:1px solid rgba(166,60,45,.32)}
+  .simple a:hover{border-color:var(--cinnabar)}
+
+  footer{padding:38px 0 58px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer p{margin:0;font-size:12px;color:var(--ink-faint);letter-spacing:.02em}
+
+  @media (max-width:760px){
+    .wrap{padding:0 20px}
+    .topbar .wrap{height:50px}
+    .topnav{gap:14px}
+    .topnav a{font-size:11px}
+    .hero{padding:52px 0 40px}
+    .hero-inner{gap:18px}
+    section{padding:42px 0}
+    .about-grid{grid-template-columns:1fr;gap:30px}
+    .timeline{grid-template-columns:1fr}
+    .tl-date{text-align:left;padding:14px 0 0 20px;white-space:normal}
+    .tl-body{border-left:1px solid var(--line);padding:8px 0 18px 20px}
+    .tl-body::before{top:12px}
+    .pub{grid-template-columns:1fr;gap:16px;padding:22px 0}
+    .thumb{width:100%;aspect-ratio:16/9}
+    .simple li{flex-direction:column;gap:6px}
+  }
+  @media print{
+    .topbar{position:static}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mini">ZH</span><span>Zebin He</span></a>
+    <nav class="topnav">
+      <a href="#about">About</a>
+      <a href="#publications">Publications</a>
+      <a href="#reports">Reports</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap" id="top">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>Zebin He</h1>
+        <p class="role">Ph.D. Student in Computer Science &nbsp;·&nbsp; HKUST</p>
+        <div class="contact">
+          <a href="mailto:zebinhe@outlook.com">Email</a><span class="dot">/</span>
+          <a href="https://github.com/ZebinHe" target="_blank" rel="noopener">GitHub</a><span class="dot">/</span>
+          <a href="https://scholar.google.com/citations?user=uliTgfkAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="shead"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>Hi! I'm Zebin He, a first-year Ph.D. student at the Hong Kong University of Science and Technology, affiliated with the <a class="plink" href="https://c4g-hkust.github.io/" target="_blank" rel="noopener">C4 Group</a>, co-supervised by <strong><a class="plink" href="https://whluo.github.io/" target="_blank" rel="noopener">Prof. Wenhan Luo</a></strong> and <strong><a class="plink" href="http://wei-xue.com/" target="_blank" rel="noopener">Prof. Wei Xue</a></strong>.</p>
+        <p>My research interests lie in 3D vision, particularly 3D shape generation, PBR material synthesis, and 2D–3D correspondence.</p>
+      </div>
+      <div>
+        <p class="sublabel">Research Interests</p>
+        <ul class="interests">
+          <li>3D Shape &amp; Geometry Generation</li>
+          <li>PBR Material and Texture Synthesis</li>
+          <li>Diffusion Acceleration &amp; Distillation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="shead"><span class="num">02</span><h2>Experience</h2></div>
+    <div class="timeline">
+      <div class="tl-date">Mar 2024 – Present</div>
+      <div class="tl-body">
+        <p class="tl-title">Hunyuan3D, Tencent</p>
+        <p class="tl-sub">Algorithm Research Intern &nbsp;·&nbsp; Shenzhen, China</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="shead"><span class="num">03</span><h2>Publications</h2></div>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/fast3d.jpg" alt="Fast and Faithful 3D Shape Generation teaser: clay-render 3D assets" loading="lazy"></div>
+      <div>
+        <h3>Fast and Faithful 3D Shape Generation: Few-Step Distillation and Visibility-Gated Anchoring</h3>
+        <div class="pub-meta"><span class="venue">arXiv 2026</span></div>
+        <p class="authors"><span class="me">Zebin He</span>, Mingxin Yang, Hanxiao Sun, Xintong Han, Chunchao Guo, Wenhan Luo</p>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/tango3d.jpg" alt="Tango3D teaser: dense pixel-to-point correspondence and cross-modal retrieval" loading="lazy"></div>
+      <div>
+        <h3>Tango3D: Towards Alignment for Global and Local 2D-3D Correspondence</h3>
+        <div class="pub-meta"><span class="venue hl">NeurIPS 2026</span></div>
+        <p class="authors"><span class="me">Zebin He</span>, Mingxin Yang, Shuhui Yang, Hanxiao Sun, Xintong Han, Chunchao Guo, Wenhan Luo</p>
+        <div class="links">
+          <a href="https://arxiv.org/pdf/2605.19727" target="_blank" rel="noopener">PDF</a>
+          <a href="https://arxiv.org/html/2605.19727v1" target="_blank" rel="noopener">Project Page</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/mvpplus.jpg" alt="MaterialMVP++ bump illustration: low-poly mesh, mesh with bump, and high-poly mesh" loading="lazy"></div>
+      <div>
+        <h3>High-quality Material Generation with Neural Bump Estimation via Multi-view PBR Diffusion</h3>
+        <div class="pub-meta"><span class="venue hl">IEEE TPAMI</span></div>
+        <p class="authors"><span class="me">Zebin He*</span>, Mingxin Yang*, Shuhui Yang, Zeqiang Lai, Xiangyu Yue, Chunchao Guo, Wenhan Luo</p>
+        <div class="links">
+          <a href="https://ieeexplore.ieee.org/document/11731530" target="_blank" rel="noopener">IEEE Xplore</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/materialmvp.jpg" alt="MaterialMVP teaser: PBR textured 3D meshes under environment illumination" loading="lazy"></div>
+      <div>
+        <h3>MaterialMVP: Illumination-Invariant Material Generation via Multi-view PBR Diffusion</h3>
+        <div class="pub-meta"><span class="venue hl">ICCV 2025 Highlight</span></div>
+        <p class="authors"><span class="me">Zebin He</span>, Mingxin Yang, Shuhui Yang, Yixuan Tang, Tao Wang, Kaihao Zhang, Guanying Chen, Yuhong Liu, Jie Jiang, Chunchao Guo, Wenhan Luo</p>
+        <div class="links">
+          <a href="https://arxiv.org/abs/2503.10289" target="_blank" rel="noopener">arXiv</a>
+          <a href="https://zebinhe.github.io/MaterialMVP/" target="_blank" rel="noopener">Project Page</a>
+          <a href="https://github.com/ZebinHe/MaterialMVP" target="_blank" rel="noopener">Code</a>
+          <a href="https://openaccess.thecvf.com/content/ICCV2025/html/He_MaterialMVP_Illumination-Invariant_Material_Generation_via_Multi-view_PBR_Diffusion_ICCV_2025_paper.html" target="_blank" rel="noopener">CVF</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/roar3d.jpg" alt="ROAR-3D teaser: professional-grade 3D assets generated from arbitrary view collections" loading="lazy"></div>
+      <div>
+        <h3>ROAR-3D: Routing Arbitrary Views for High-Fidelity 3D Generation</h3>
+        <div class="pub-meta"><span class="venue hl">ECCV 2026</span></div>
+        <p class="authors">Hanxiao Sun*, Mingxin Yang*, Shuhui Yang, <span class="me">Zebin He</span>, Xintong Han, Hongbo Fu, Chunchao Guo, Wenhan Luo</p>
+        <div class="links">
+          <a href="https://arxiv.org/pdf/2605.21121" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section id="reports">
+    <div class="shead"><span class="num">04</span><h2>Technical Reports</h2></div>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/hunyuan25.jpg" alt="Hunyuan3D 2.5 teaser grid" loading="lazy"></div>
+      <div>
+        <h3>Hunyuan3D 2.5: Towards High-Fidelity 3D Assets Generation with Ultimate Details</h3>
+        <div class="pub-meta"><span class="venue hl">Tech Report</span></div>
+        <p class="authors"><span class="me">Zebin He</span> is one of the contributors.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2506.16504" target="_blank" rel="noopener">arXiv</a></div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/hunyuan21.jpg" alt="Hunyuan3D 2.1 teaser" loading="lazy"></div>
+      <div>
+        <h3>Hunyuan3D 2.1: From Images to High-Fidelity 3D Assets with Production-Ready PBR Material</h3>
+        <div class="pub-meta"><span class="venue hl">Tech Report</span></div>
+        <p class="authors"><span class="me">Zebin He</span> is one of the core contributors.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2506.15442" target="_blank" rel="noopener">arXiv</a></div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/hunyuan20.jpg" alt="Hunyuan3D 2.0 teaser" loading="lazy"></div>
+      <div>
+        <h3>Hunyuan3D 2.0: Scaling Diffusion Models for High Resolution Textured 3D Assets Generation</h3>
+        <div class="pub-meta"><span class="venue hl">Tech Report</span></div>
+        <p class="authors"><span class="me">Zebin He</span> is one of the core contributors.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2501.12202" target="_blank" rel="noopener">arXiv</a></div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/hunyuan10.jpg" alt="Hunyuan3D 1.0 teaser" loading="lazy"></div>
+      <div>
+        <h3>Hunyuan3D 1.0: A Unified Framework for Text-to-3D and Image-to-3D Generation</h3>
+        <div class="pub-meta"><span class="venue hl">Tech Report</span></div>
+        <p class="authors"><span class="me">Zebin He</span> is one of the core contributors.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2411.02293" target="_blank" rel="noopener">arXiv</a></div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <div class="thumb"><img src="assets/studio.jpg" alt="Hunyuan3D Studio teaser" loading="lazy"></div>
+      <div>
+        <h3>Hunyuan3D Studio: End-to-End AI Pipeline for Game-Ready 3D Asset Generation</h3>
+        <div class="pub-meta"><span class="venue hl">Tech Report</span></div>
+        <p class="authors"><span class="me">Zebin He</span> is one of the core contributors.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2509.12815" target="_blank" rel="noopener">arXiv</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects">
+    <div class="shead"><span class="num">05</span><h2>Projects</h2></div>
+    <ul class="simple">
+      <li>
+        <div><a href="https://3d.hunyuan.tencent.com/" target="_blank" rel="noopener">Tencent Hunyuan3D Series</a><span class="s-sub">Online application for high-fidelity 3D asset generation</span></div>
+        <span class="s-year">Online Application</span>
+      </li>
+      <li>
+        <div>3D Role Generation for User-Generated Content<span class="s-sub">Tencent Yuanbao APP</span></div>
+        <span class="s-year">Tencent Yuanbao</span>
+      </li>
+    </ul>
+  </section>
+
+
+  <footer>
+    <p>© 2026 Zebin He &nbsp;·&nbsp; Last updated November 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
